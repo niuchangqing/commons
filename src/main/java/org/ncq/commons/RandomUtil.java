@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * 随机相关工具类
  * @author niuchangqing
  */
-public final class RandomUtil {
+public class RandomUtil {
 
     /**
      * 0～9数字字符串

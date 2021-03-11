@@ -4,7 +4,7 @@ package org.ncq.commons;
  * @author niuchangqing
  * 字符串工具类
  */
-public final class StringUtil {
+public class StringUtil {
 
     /**
      * "" 字符串
