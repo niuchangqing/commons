@@ -63,6 +63,11 @@ public class StringUtil {
 
     /**
      * 判断字符串不是null或""
+     * <p>
+     *     null = false;
+     *     "" = false;
+     *     " " = true;
+     * </p>
      * @param charSequence      校验参数
      * @return                  true或者false
      */
