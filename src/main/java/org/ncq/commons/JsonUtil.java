@@ -51,7 +51,7 @@ public class JsonUtil {
      * @param <T>       javaBean
      * @return          返回指定转换的结果对象
      */
-    public static <T> T toObj(String str, Class<T> clazz) throws JsonProcessingException {
+    public static <T> T toObj(String str, Class<T> clazz) {
         try {
             return objectMapper.readValue(str, clazz);
         }catch (JsonProcessingException e) {
