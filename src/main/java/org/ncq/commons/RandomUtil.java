@@ -1,5 +1,7 @@
 package org.ncq.commons;
 
+import static org.ncq.commons.StringUtil.*;
+
 import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -96,8 +98,8 @@ public class RandomUtil {
      * @return          随机字符串
      */
     public static String randomString(int length, String str){
-        if (length <= 0 || StringUtil.isEmpty(str)) {
-            return StringUtil.EMPTY;
+        if (length <= 0 || isEmpty(str)) {
+            return EMPTY;
         }
         StringBuilder sb = new StringBuilder();
         int randomLength = str.length();
