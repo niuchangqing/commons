@@ -108,6 +108,11 @@ public class CollectionUtil {
 
     /**
      * 判断map是否不为null和{}
+     * <p>
+     *     null = false;
+     *     {} = false;
+     *     {"name":"zhang"} = true;
+     * </p>
      * @param map               map参数
      * @return                  返回true或者false
      */
