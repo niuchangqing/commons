@@ -35,7 +35,7 @@ public class JsonUtil {
      * @param obj       参数
      * @return          返回字符串
      */
-    public static String toString(Object obj) {
+    public static String toString(final Object obj) {
         try {
             return objectMapper.writeValueAsString(obj);
         }catch (JsonProcessingException e) {
@@ -51,7 +51,7 @@ public class JsonUtil {
      * @param <T>       javaBean
      * @return          返回指定转换的结果对象
      */
-    public static <T> T toObj(String str, Class<T> clazz) {
+    public static <T> T toObj(final String str, Class<T> clazz) {
         try {
             return objectMapper.readValue(str, clazz);
         }catch (JsonProcessingException e) {
@@ -69,7 +69,7 @@ public class JsonUtil {
      * @param <T>       java对象
      * @return          返回指定转换的结果对象
      */
-    public static <T> T toObj(String str, TypeReference<T> reference) {
+    public static <T> T toObj(final String str, TypeReference<T> reference) {
         try {
             return objectMapper.readValue(str, reference);
         }catch (JsonProcessingException e) {
@@ -82,7 +82,7 @@ public class JsonUtil {
      * @param str       指定字符串
      * @return          返回JsonNode
      */
-    public static JsonNode readNode(String str) {
+    public static JsonNode readNode(final String str) {
         try {
             return objectMapper.readTree(str);
         }catch (JsonProcessingException e) {

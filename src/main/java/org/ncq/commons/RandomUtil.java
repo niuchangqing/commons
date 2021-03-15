@@ -51,6 +51,14 @@ public class RandomUtil {
     }
 
     /**
+     * 获取随机数字,范围[0,Integer.MAX_VALUE],不包含Integer.MAX_VALUE
+     * @return          随机数
+     */
+    public static int randomInt() {
+        return randomInt(0, Integer.MAX_VALUE);
+    }
+
+    /**
      * 获取随机数字,范围[0,max]。不包含max
      * <p>
      *     max参数不能小于或等于0
@@ -58,7 +66,7 @@ public class RandomUtil {
      * @param max       随机数最大范围,不包含max
      * @return          随机数
      */
-    public static int randomInt(int max) {
+    public static int randomInt(final int max) {
         return randomInt(0, max);
     }
 
@@ -68,7 +76,7 @@ public class RandomUtil {
      * @param max       随机数最大范围,不包含max。
      * @return          返回int类型随机数字
      */
-    public static int randomInt(int min, int max) {
+    public static int randomInt(final int min, final int max) {
         return getRandom().nextInt(min, max);
     }
 
@@ -86,7 +94,7 @@ public class RandomUtil {
      * @param length    随机获取字符串的长度
      * @return          随机字符串
      */
-    public static String randomString(int length) {
+    public static String randomString(final int length) {
         return randomString(length, LOWER_UPPER_CASE_NUMBER);
     }
 
@@ -97,7 +105,7 @@ public class RandomUtil {
      * @param str       取样字符串
      * @return          随机字符串
      */
-    public static String randomString(int length, String str){
+    public static String randomString(final int length, final String str){
         if (length <= 0 || isEmpty(str)) {
             return EMPTY;
         }
@@ -111,22 +119,30 @@ public class RandomUtil {
     }
 
     /**
-     * 随机获取long类型随机数
+     * 随机获取long类型随机数,范围[0,Long.MAX_VALUE],不包含Long.MAX_VALUE
+     * @return          随机数
+     */
+    public static long randomLong() {
+        return randomLong(0,Long.MAX_VALUE);
+    }
+
+    /**
+     * 随机获取long类型随机数,范围[0,max],不包含max
      * @param max       随机数最大值,不能小于或等于0,最大值不包含max
      * @return          返回long类型随机数
      */
-    public static long randomLong(long max) {
+    public static long randomLong(final long max) {
         return randomLong(0, max);
     }
 
     /**
-     * 随机获取long类型随机数
+     * 随机获取long类型随机数,范围[min,max],不包含max
      * max不能小于等于min
      * @param min       随机数最小值
      * @param max       随机数最大值,最大值不包含max
      * @return          long类型随机数
      */
-    public static long randomLong(long min, long max) {
+    public static long randomLong(final long min, final long max) {
         return getRandom().nextLong(min, max);
     }
 
