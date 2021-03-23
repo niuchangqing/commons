@@ -1,9 +1,6 @@
 package org.ncq.commons.collect;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -116,5 +113,32 @@ public final class Maps {
     public static <K, V> TreeMap<K,V> newTreeMap(Map<? extends K, ? extends V> map) {
         checkNotNull(map);
         return new TreeMap<>(map);
+    }
+
+    /**
+     * 创建WeakHashMap
+     * @return                  a empty WeakHashMap
+     */
+    public static <K, V> WeakHashMap<K, V> newWeakHashMap() {
+        return new WeakHashMap<>();
+    }
+
+    /**
+     * 创建WeakHashMap,并初始化数据
+     * @param map               HashMap,TreeMap等map参数
+     * @return                  WeakHashMap
+     */
+    public static <K, V> WeakHashMap<K, V> newWeakHashMap(Map<? extends K, ? extends V> map) {
+        checkNotNull(map);
+        return new WeakHashMap<>(map);
+    }
+
+    /**
+     * 创建指定大小的WeakHashMap
+     * @param size              数量大小参数
+     * @return                  a empty WeakHashMap
+     */
+    public static <K, V> WeakHashMap<K, V> newWeakHashMap(int size) {
+        return new WeakHashMap<>(size);
     }
 }

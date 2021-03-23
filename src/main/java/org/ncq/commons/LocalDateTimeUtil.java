@@ -1,13 +1,16 @@
 package org.ncq.commons;
 import static org.ncq.commons.base.Preconditions.checkNotNull;
+import static org.ncq.commons.base.Objects.isNull;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * @author niuchangqing
- * LocalDateTime工具
+ * jdk8+ LocalDateTime工具
+ * LocalDateTime包含日期和时间,格式类似yyyy-MM-dd HH:mm:ss
  */
 public class LocalDateTimeUtil {
 
@@ -136,7 +139,7 @@ public class LocalDateTimeUtil {
      * @return                  时间格式化后的字符串
      */
     public static String toString(LocalDateTime localDateTime) {
-        if (localDateTime == null) {
+        if (isNull(localDateTime)) {
             return null;
         }
         return localDateTime.format(YYYY_MM_DD_HH_MM_SS);
@@ -145,30 +148,127 @@ public class LocalDateTimeUtil {
     /**
      * LocalDateTime日期转字符串,指定字符串日期格式
      * @param localDateTime     时间
-     * @param formatter         字符串日期格式
+     * @param formatter         字符串日期格式对象,如:DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
      * @return                  时间格式化后的字符串
      */
     public static String toString(LocalDateTime localDateTime, DateTimeFormatter formatter) {
-        if (localDateTime == null) {
+        if (isNull(localDateTime)) {
             return null;
         }
-        if (formatter == null) {
+        if (isNull(formatter)) {
             formatter = YYYY_MM_DD_HH_MM_SS;
         }
         return localDateTime.format(formatter);
     }
 
     /**
+     * LocalDateTime转日期格式字符串,指定字符串日期格式
+     * @param localDateTime     时间
+     * @param format            日期格式化字符串,如:yyyy-MM-dd HH:mm:ss
+     * @return                  时间格式化后的字符串
+     */
+    public static String toString(LocalDateTime localDateTime, String format) {
+        if (isNull(localDateTime)) {
+            return null;
+        }
+        checkNotNull(format);
+        return localDateTime.format(DateTimeFormatter.ofPattern(format));
+    }
+
+    /**
      * 日期格式字符串转LocalDateTime
      * @param str               日期字符串,如:yyyy-MM-dd HH:mm:ss
-     * @param formatter         字符串日期格式
+     * @param formatter         字符串日期格式对象,如:DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
      * @return                  LocalDateTime
      */
     public static LocalDateTime ofString(String str, DateTimeFormatter formatter) {
-        if (str == null) {
+        if (isNull(str)) {
             return null;
         }
         checkNotNull(formatter);
         return LocalDateTime.parse(str, formatter);
+    }
+
+    /**
+     * 日期格式字符串转LocalDateTime
+     * @param str               日期字符串,如:yyyy-MM-dd HH:mm:ss
+     * @param format            字符串日期格式,如:yyyy-MM-dd HH:mm:ss
+     * @return                  LocalDateTime
+     */
+    public static LocalDateTime ofString(String str, String format) {
+        if (isNull(str)) {
+            return null;
+        }
+        checkNotNull(format);
+        return LocalDateTime.parse(str, DateTimeFormatter.ofPattern(format));
+    }
+
+    /**
+     * 获取当前时间,默认时区为当前系统时区
+     * @return                  LocalDateTime
+     */
+    public static LocalDateTime now() {
+        return LocalDateTime.now();
+    }
+
+    /**
+     * 获取指定时区的当前时间
+     * @param zoneId            时区
+     * @return                  LocalDateTime
+     */
+    public static LocalDateTime now(ZoneId zoneId) {
+        return LocalDateTime.now(zoneId);
+    }
+
+    /**
+     * LocalDateTime转Date,默认时区为当前系统时区
+     * @param localDateTime       LocalDateTime
+     * @return                    Date
+     */
+    public static Date toDate(LocalDateTime localDateTime) {
+        if (isNull(localDateTime)) {
+            return null;
+        }
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
+     * LocalDateTime转Date,指定时区
+     * @param localDateTime         LocalDateTime
+     * @param zoneId                时区
+     * @return                      Date
+     */
+    public static Date toDate(LocalDateTime localDateTime, ZoneId zoneId) {
+        if (isNull(localDateTime)) {
+            return null;
+        }
+        checkNotNull(zoneId);
+        return Date.from(localDateTime.atZone(zoneId).toInstant());
+    }
+
+    /**
+     * Date转LocalDateTime,默认为当前系统时区
+     * @param date              date
+     * @return                  LocalDateTime
+     */
+    public static LocalDateTime ofDate(Date date) {
+        if (isNull(date)) {
+            return null;
+        }
+        return LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault());
+    }
+
+    /**
+     * Date转LocalDateTime,指定时区
+     * @param date              Date
+     * @param zoneId            时区
+     * @return                  LocalDateTime
+     */
+    public static LocalDateTime ofDate(Date date, ZoneId zoneId) {
+        if (isNull(date)) {
+            return null;
+        }
+        checkNotNull(zoneId);
+        return LocalDateTime.ofInstant(date.toInstant(), zoneId);
     }
 }

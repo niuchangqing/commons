@@ -74,6 +74,32 @@ public class LocalDateTimeUtilTest {
         System.out.println(LocalDateTimeUtil.toString(now,LocalDateTimeUtil.YYYY_MM_DD_HH_MM_SS_SSS));
     }
 
+    @Test
+    public void nowTest() {
+        LocalDateTime localDateTime = LocalDateTimeUtil.now();
+        System.out.println(localDateTime.toString());
+        LocalDateTime localDateTime1 = LocalDateTimeUtil.now(ZoneId.of("America/New_York"));
+        System.out.println(localDateTime1.toString());
+        String s = LocalDateTimeUtil.toString(LocalDateTimeUtil.now());
+        LocalDateTime localDateTime2 = LocalDateTimeUtil.ofString(s, "yyyy-MM-dd HH:mm:ss");
+        System.out.println(localDateTime2.toString());
+        LocalDateTime localDateTime3 = localDateTime2.plusHours(-1);
+        System.out.println(localDateTime2.toString());
+        System.out.println(localDateTime3.toString());
+
+        LocalDateTime localDateTime4 = LocalDateTimeUtil.now().withHour(0).withMinute(0).withSecond(0);
+        System.out.println(localDateTime4.toString());
+    }
+
+    @Test
+    public void toDateTest() {
+        Date date = LocalDateTimeUtil.toDate(LocalDateTimeUtil.now());
+        System.out.println(date.toString());
+        date = LocalDateTimeUtil.toDate(null);
+        System.out.println(date);
+    }
+
+
 
     public static class Ta {
         public LocalDateTime date;
