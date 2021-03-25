@@ -14,6 +14,8 @@ import static org.ncq.commons.base.Preconditions.checkNotNull;
  */
 public class LocalDateUtil {
 
+    private LocalDateUtil() {}
+
     /**
      * LocalDate日期转日期格式字符串,默认yyyy-MM-dd格式
      * @param localDate             时间

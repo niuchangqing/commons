@@ -13,6 +13,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class LocalTimeUtil {
 
+    private LocalTimeUtil() {}
+
     /**
      * time转字符串,默认HH:mm:ss格式
      * @param localTime             time

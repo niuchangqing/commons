@@ -55,6 +55,8 @@ public class LocalDateTimeUtil {
      */
     private static final DateTimeFormatter YYYY_MM_DD_HH_MM_SS_SSS_FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss.SSS");
 
+    private LocalDateTimeUtil() {}
+
     /**
      * 获取当前时间的毫秒时间戳,默认系统时区
      * @return          毫秒时间戳
