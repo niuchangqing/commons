@@ -1,9 +1,8 @@
 package org.ncq.commons;
 import static org.ncq.commons.base.Preconditions.checkNotNull;
 import static org.ncq.commons.base.Objects.isNull;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -71,7 +70,7 @@ public class LocalDateTimeUtil {
      * @return                  毫秒时间戳
      */
     public static long currentTimeMillis(ZoneId zoneId) {
-        return LocalDateTime.now().atZone(zoneId).toInstant().toEpochMilli();
+        return LocalDateTime.now(zoneId).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
     }
 
     /**
@@ -102,14 +101,31 @@ public class LocalDateTimeUtil {
     }
 
     /**
-     * 毫秒时间戳转LocalDateTime,指定时区进行转换
+     * 毫秒时间戳转LocalDateTime,指定时区进行转换,默认时间戳时区为当前系统时区
      * @param timestamp         毫秒时间戳
      * @param zoneId            时区
      * @return                  LocalDateTime
      */
     public static LocalDateTime ofMillis(long timestamp, ZoneId zoneId) {
+        return ofMillis(timestamp, ZoneId.systemDefault(), zoneId);
+    }
+
+    /**
+     * 毫秒时间戳转LocalDateTime，指定时区，指定时间戳时区
+     * @param timestamp         毫秒时间戳
+     * @param timestampZoneId   时间戳时区
+     * @param zoneId            时区
+     * @return                  LocalDateTime
+     */
+    public static LocalDateTime ofMillis(long timestamp, ZoneId timestampZoneId, ZoneId zoneId) {
+        checkNotNull(timestampZoneId);
+        checkNotNull(zoneId);
         Instant instant = Instant.ofEpochMilli(timestamp);
-        return LocalDateTime.ofInstant(instant, zoneId);
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        ZonedDateTime zonedDateTime = localDateTime.atZone(timestampZoneId);
+        //转换对应时区后的时间戳
+        long millis = zonedDateTime.withZoneSameInstant(zoneId).toLocalDateTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(millis),ZoneId.systemDefault());
     }
 
     /**
@@ -123,14 +139,31 @@ public class LocalDateTimeUtil {
     }
 
     /**
-     * 秒时间戳转LocalDateTime,指定时区
+     * 秒时间戳转LocalDateTime,指定时区,默认timestamp的时区为当前系统时区
      * @param timestamp         时间戳,单位秒
      * @param zoneId            时区
      * @return                  LocalDateTime
      */
     public static LocalDateTime ofSecond(long timestamp, ZoneId zoneId) {
+        return ofSecond(timestamp, ZoneId.systemDefault(), zoneId);
+    }
+
+    /**
+     * 秒时间戳转LocalDateTime,指定时区,指定时间戳的时区
+     * @param timestamp                 时间戳
+     * @param timestampZoneId           时间戳时区
+     * @param zoneId                    转换后的LocalDateTime时区
+     * @return                          LocalDateTime
+     */
+    public static LocalDateTime ofSecond(long timestamp, ZoneId timestampZoneId, ZoneId zoneId) {
+        checkNotNull(timestampZoneId);
+        checkNotNull(zoneId);
         Instant instant = Instant.ofEpochSecond(timestamp);
-        return LocalDateTime.ofInstant(instant, zoneId);
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        ZonedDateTime zonedDateTime = localDateTime.atZone(timestampZoneId);
+        //转换对应时区后的时间戳
+        long millis = zonedDateTime.withZoneSameInstant(zoneId).toLocalDateTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(millis),ZoneId.systemDefault());
     }
 
     /**
@@ -221,7 +254,7 @@ public class LocalDateTimeUtil {
     }
 
     /**
-     * LocalDateTime转Date,默认时区为当前系统时区
+     * LocalDateTime转Date,默认时区为当前系统时区,LocalDateTime的时区默认为当前系统时区
      * @param localDateTime       LocalDateTime
      * @return                    Date
      */
@@ -233,7 +266,7 @@ public class LocalDateTimeUtil {
     }
 
     /**
-     * LocalDateTime转Date,指定时区
+     * LocalDateTime转Date,指定时区,默认LocalDateTime时间为当前系统时区时间
      * @param localDateTime         LocalDateTime
      * @param zoneId                时区
      * @return                      Date
@@ -242,8 +275,24 @@ public class LocalDateTimeUtil {
         if (isNull(localDateTime)) {
             return null;
         }
+        return toDate(localDateTime, ZoneId.systemDefault(), zoneId);
+    }
+
+    /**
+     * LocalDateTime转Date,指定时区,指定LocalDateTime的时区进行转换
+     * @param localDateTime
+     * @param dateTimeZoneId
+     * @param zoneId
+     * @return
+     */
+    public static Date toDate(LocalDateTime localDateTime, ZoneId dateTimeZoneId, ZoneId zoneId) {
+        if (isNull(localDateTime)) {
+            return null;
+        }
+        checkNotNull(dateTimeZoneId);
         checkNotNull(zoneId);
-        return Date.from(localDateTime.atZone(zoneId).toInstant());
+        ZonedDateTime zonedDateTime = localDateTime.atZone(dateTimeZoneId);
+        return new Date(zonedDateTime.withZoneSameInstant(zoneId).toLocalDateTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
     }
 
     /**

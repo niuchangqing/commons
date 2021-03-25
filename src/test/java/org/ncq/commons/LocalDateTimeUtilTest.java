@@ -99,6 +99,34 @@ public class LocalDateTimeUtilTest {
         System.out.println(date);
     }
 
+    @Test
+    public void sjcTest() {
+        long l = LocalDateTimeUtil.currentTimeMillis();
+        long l1 = LocalDateTimeUtil.currentTimeMillis(ZoneOffset.UTC);
+        System.out.println(l);
+        System.out.println(l1);
+
+        System.out.println(LocalDateTimeUtil.ofMillis(l).toString());
+        System.out.println(LocalDateTimeUtil.ofMillis(l1,ZoneOffset.UTC).toString());
+
+        System.out.println(LocalDateTimeUtil.now(ZoneOffset.UTC).toString());
+
+        System.out.println(LocalDateTimeUtil.toDate(LocalDateTimeUtil.now(ZoneOffset.UTC), ZoneOffset.UTC, ZoneOffset.ofHours(8)).getTime());
+
+
+        System.out.println(LocalDateTimeUtil.ofDate(new Date()).toString());
+        System.out.println(LocalDateTimeUtil.ofDate(new Date(),ZoneOffset.UTC).toString());
+
+        System.out.println(LocalDateTimeUtil.ofSecond(LocalDateTimeUtil.currentTimeSecond(),ZoneOffset.UTC).toString());
+
+        System.out.println(LocalDateTimeUtil.ofSecond(LocalDateTimeUtil.currentTimeSecond(ZoneOffset.UTC),ZoneOffset.UTC,ZoneOffset.ofHours(4)).toString());
+
+        System.out.println(LocalDateTimeUtil.ofMillis(new Date().getTime()).toString());
+        System.out.println(LocalDateTimeUtil.ofMillis(LocalDateTimeUtil.currentTimeMillis(ZoneOffset.UTC)).toString());
+        System.out.println(LocalDateTimeUtil.ofMillis(LocalDateTimeUtil.currentTimeMillis(ZoneOffset.UTC),ZoneOffset.UTC, ZoneOffset.ofHours(4)).toString());
+
+        System.out.println(LocalDateTimeUtil.ofDate(new Date(), ZoneOffset.UTC).toString());
+    }
 
 
     public static class Ta {
