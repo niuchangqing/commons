@@ -1,7 +1,9 @@
 package org.ncq.commons.collect;
-import static org.ncq.commons.base.Preconditions.checkNotNull;
+
 import java.util.Collection;
 import java.util.Iterator;
+
+import static org.ncq.commons.base.Preconditions.checkNotNull;
 
 /**
  * @author niuchangqing
@@ -28,6 +30,21 @@ public final class Iterators {
         while (iterator.hasNext()) {
             flag |= collection.add(iterator.next());
         }
-        return false;
+        return flag;
+    }
+
+    /**
+     * 获取Iterator size
+     * 注意一旦调用该方法之后iterator.hasNext()结果就为false,再次使用需要重新获取迭代器
+     * @param iterator          集合迭代器
+     * @return                  迭代器数据size
+     */
+    public static int size(Iterator<?> iterator) {
+        int size = 0;
+        while (iterator.hasNext()) {
+            iterator.next();
+            size++;
+        }
+        return size;
     }
 }

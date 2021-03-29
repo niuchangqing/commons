@@ -24,4 +24,13 @@ public final class Iterables {
         }
         return Iterators.addAll(collection,iterable.iterator());
     }
+
+    /**
+     * 获取Iterable size
+     * @param iterable              Iterable
+     * @return                      集合大小
+     */
+    public static int size(Iterable<?> iterable) {
+        return (iterable instanceof Collection) ? ((Collection<?>) iterable).size() : Iterators.size(iterable.iterator());
+    }
 }
