@@ -47,14 +47,15 @@ public class Joiner {
      * String[] strings = new String[]{"2","3","1"}
      * Joiner.on(",").join(strings);
      * 结果:2,3,1
-     * @param objects               数组
+     * @param elements               数组
      * @return                      拼接结果字符串
      */
-    public final String join(final Object[] objects) {
-        if (isNull(objects)) {
+    @SafeVarargs
+    public final <T> String join(final T... elements) {
+        if (isNull(elements)) {
             return null;
         }
-        return join(objects, 0, objects.length);
+        return join(elements, 0, elements.length);
     }
     /**
      * 以指定字符拼接
@@ -151,5 +152,269 @@ public class Joiner {
 
     private StringJoiner newStringJoiner() {
         return new StringJoiner(separator);
+    }
+
+    /**
+     * 以指定字符连接
+     * @param array             int数组
+     * @return                  拼接后的字符串
+     */
+    public final String join(final int[] array) {
+        if (isNull(array)) {
+            return null;
+        }
+        return join(array, 0, array.length);
+    }
+
+    /**
+     * 以指定字符连接
+     * @param array             int数组
+     * @param startIndex        指定位置开始处理
+     * @param endIndex          指定位置截止处理
+     * @return                  拼接结果字符串
+     */
+    public final String join(final int[] array, final int startIndex, final int endIndex) {
+        if (isNull(array)) {
+            return null;
+        }
+        if (endIndex - startIndex <= 0) {
+            return EMPTY;
+        }
+        final StringJoiner stringJoiner = newStringJoiner();
+        for (int i = startIndex; i < endIndex; i++) {
+            stringJoiner.add(String.valueOf(array[i]));
+        }
+        return stringJoiner.toString();
+    }
+
+    /**
+     * 以指定字符连接
+     * @param array             byte数组
+     * @return                  拼接结果字符串
+     */
+    public final String join(final byte[] array) {
+        if (isNull(array)) {
+            return null;
+        }
+        return join(array, 0, array.length);
+    }
+
+    /**
+     * 以指定字符连接
+     * @param array             byte数组
+     * @param startIndex        指定位置开始处理
+     * @param endIndex          指定位置截止处理
+     * @return                  拼接结果字符串
+     */
+    public final String join(final byte[] array, final int startIndex, final int endIndex) {
+        if (isNull(array)) {
+            return null;
+        }
+        if (endIndex - startIndex <= 0) {
+            return EMPTY;
+        }
+        final StringJoiner stringJoiner = newStringJoiner();
+        for (int i = startIndex; i < endIndex; i++) {
+            stringJoiner.add(String.valueOf(array[i]));
+        }
+        return stringJoiner.toString();
+    }
+
+    /**
+     * 字符串拼接
+     * @param array             long数组
+     * @return                  拼接结果字符串
+     */
+    public final String join(final long[] array) {
+        if (isNull(array)) {
+            return null;
+        }
+        return join(array, 0, array.length);
+    }
+
+    /**
+     * 字符串拼接
+     * @param array                 long数组
+     * @param startIndex            指定位置开始处理
+     * @param endIndex              指定位置截止处理
+     * @return                      拼接结果字符串
+     */
+    public final String join(final long[] array, final int startIndex, final int endIndex) {
+        if (isNull(array)) {
+            return null;
+        }
+        if (endIndex - startIndex <= 0) {
+            return EMPTY;
+        }
+        final StringJoiner stringJoiner = newStringJoiner();
+        for (int i = startIndex; i < endIndex; i++) {
+            stringJoiner.add(String.valueOf(array[i]));
+        }
+        return stringJoiner.toString();
+    }
+
+    /**
+     * 字符串拼接
+     * @param array             double数组
+     * @return                  拼接结果字符串
+     */
+    public final String join(final double[] array) {
+        if (isNull(array)) {
+            return null;
+        }
+        return join(array, 0, array.length);
+    }
+
+    /**
+     * 字符串拼接
+     * @param array             double数组
+     * @param startIndex        指定位置开始处理
+     * @param endIndex          指定位置截止处理
+     * @return                  拼接结果字符串
+     */
+    public final String join(final double[] array, final int startIndex, final int endIndex) {
+        if (isNull(array)) {
+            return null;
+        }
+        if (endIndex - startIndex <= 0) {
+            return EMPTY;
+        }
+        final StringJoiner stringJoiner = newStringJoiner();
+        for (int i = startIndex; i < endIndex; i++) {
+            stringJoiner.add(String.valueOf(array[i]));
+        }
+        return stringJoiner.toString();
+    }
+
+    /**
+     * 字符串拼接
+     * @param array             float数组
+     * @return                  拼接结果字符串
+     */
+    public final String join(final float[] array) {
+        if (isNull(array)) {
+            return null;
+        }
+        return join(array, 0, array.length);
+    }
+
+    /**
+     * 字符串拼接
+     * @param array             float数组
+     * @param startIndex        指定位置开始处理
+     * @param endIndex          指定位置截止处理
+     * @return                  拼接结果字符串
+     */
+    public final String join(final float[] array, final int startIndex, final int endIndex) {
+        if (isNull(array)) {
+            return null;
+        }
+        if (endIndex - startIndex <= 0) {
+            return EMPTY;
+        }
+        final StringJoiner stringJoiner = newStringJoiner();
+        for (int i = startIndex; i < endIndex; i++) {
+            stringJoiner.add(String.valueOf(array[i]));
+        }
+        return stringJoiner.toString();
+    }
+
+    /**
+     * 字符串拼接
+     * @param array             short数组
+     * @return                  拼接结果字符串
+     */
+    public final String join(final short[] array) {
+        if (isNull(array)) {
+            return null;
+        }
+        return join(array, 0, array.length);
+    }
+
+    /**
+     * 字符串拼接
+     * @param array             short数组
+     * @param startIndex        指定位置开始处理
+     * @param endIndex          指定位置截止处理
+     * @return                  拼接结果字符串
+     */
+    public final String join(final short[] array, final int startIndex, final int endIndex) {
+        if (isNull(array)) {
+            return null;
+        }
+        if (endIndex - startIndex <= 0) {
+            return EMPTY;
+        }
+        final StringJoiner stringJoiner = newStringJoiner();
+        for (int i = startIndex; i < endIndex; i++) {
+            stringJoiner.add(String.valueOf(array[i]));
+        }
+        return stringJoiner.toString();
+    }
+
+    /**
+     * 字符串拼接
+     * @param array             boolean数组
+     * @return                  拼接结果字符串
+     */
+    public final String join(final boolean[] array) {
+        if (isNull(array)) {
+            return null;
+        }
+        return join(array, 0, array.length);
+    }
+
+    /**
+     * 字符串拼接
+     * @param array                 boolean数组
+     * @param startIndex            指定位置开始处理
+     * @param endIndex              指定位置截止处理
+     * @return                      拼接结果字符串
+     */
+    public final String join(final boolean[] array, final  int startIndex, final int endIndex) {
+        if (isNull(array)) {
+            return null;
+        }
+        if (endIndex - startIndex <= 0) {
+            return EMPTY;
+        }
+        final StringJoiner stringJoiner = newStringJoiner();
+        for (int i = startIndex; i < endIndex; i++) {
+            stringJoiner.add(String.valueOf(array[i]));
+        }
+        return stringJoiner.toString();
+    }
+
+    /**
+     * 字符串拼接
+     * @param array             char数组
+     * @return                  拼接结果字符串
+     */
+    public final String join(final char[] array) {
+        if (isNull(array)) {
+            return null;
+        }
+        return join(array, 0, array.length);
+    }
+
+    /**
+     * 字符串拼接
+     * @param array             char数组
+     * @param startIndex        指定位置开始处理
+     * @param endIndex          指定位置截止处理
+     * @return                  拼接结果字符串
+     */
+    public final String join(final char[] array, final  int startIndex, final int endIndex) {
+        if (isNull(array)) {
+            return null;
+        }
+        if (endIndex - startIndex <= 0) {
+            return EMPTY;
+        }
+        final StringJoiner stringJoiner = newStringJoiner();
+        for (int i = startIndex; i < endIndex; i++) {
+            stringJoiner.add(String.valueOf(array[i]));
+        }
+        return stringJoiner.toString();
     }
 }
