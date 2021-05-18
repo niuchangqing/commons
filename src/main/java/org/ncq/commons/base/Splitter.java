@@ -9,10 +9,9 @@ import java.util.Map;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import static org.ncq.commons.StringUtil.EMPTY;
-import static org.ncq.commons.StringUtil.isNotEmpty;
 import static org.ncq.commons.CollectionUtil.isEmpty;
 import static org.ncq.commons.CollectionUtil.isNotEmpty;
+import static org.ncq.commons.StringUtil.isNotEmpty;
 import static org.ncq.commons.base.Objects.isNull;
 import static org.ncq.commons.base.Preconditions.checkState;
 /**
@@ -85,7 +84,7 @@ public class Splitter {
      * Splitter.on(",").split("1,2,3");
      * 结果:["1","2","3"]
      * @param str                   待分割字符串
-     * @return
+     * @return                      分割后的字符串
      */
     public final Stream<String> splitToStream(final String str) {
         List<String> list = splitWork(str);
@@ -146,9 +145,12 @@ public class Splitter {
     /**
      * 获取一个MapSplitter分割器,将指定字符串分割为Map
      * 样例:
+     * {@code
      * String str = "page=1&pageSize=10&name=zhangsan&age=18";
      * Map<String, String> split = Splitter.on("&").withKeyValueSeparator("=").split(str);
      * 结果:{"page":"1","pageSize":"10","name":"zhangsan","age":"18"}
+     * }
+     * @param separator         第二次拆分的标记字符串,对应上面样例代码中的=字符
      * @return                  MapSplitter
      */
     public final MapSplitter withKeyValueSeparator(final String separator) {
@@ -158,9 +160,12 @@ public class Splitter {
     /**
      * 获取一个MapSplitter分割器,将指定字符串分割为Map
      * 样例:
+     * {@code
      * String str = "page=1&pageSize=10&name=zhangsan&age=18";
      * Map<String, String> split = Splitter.on("&").withKeyValueSeparator("=").split(str);
      * 结果:{"page":"1","pageSize":"10","name":"zhangsan","age":"18"}
+     * }
+     * @param separator         第二次拆分的标记字符
      * @return                  MapSplitter
      */
     public final MapSplitter withKeyValueSeparator(final char separator) {
@@ -186,9 +191,11 @@ public class Splitter {
         /**
          * 字符串分割转Map
          * 样例:
+         * {@code
          * String str = "page=1&pageSize=10&name=zhangsan&age=18";
          * Map<String, String> split = Splitter.on("&").withKeyValueSeparator("=").split(str);
          * 结果:{"page":"1","pageSize":"10","name":"zhangsan","age":"18"}
+         * }
          * @param str               待分割字符串
          * @return                  Map。注意返回的map不能进行put操作
          */

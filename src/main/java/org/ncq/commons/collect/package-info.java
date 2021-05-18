@@ -1,9 +1,11 @@
 /**
  * 集合相关操作工具类包
- * <li>Lists</li>
- * <li>Maps</li>
- * <li>Sets</li>
- * <li>Iterables</li>
- * <li>Iterators</li>
+ * <ul>
+ * <li>Lists
+ * <li>Maps
+ * <li>Sets
+ * <li>Iterables
+ * <li>Iterators
+ * </ul>
  */
 package org.ncq.commons.collect;

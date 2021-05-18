@@ -22,8 +22,9 @@ public final class Preconditions {
 
     /**
      * 判断是否为空,为空抛出NullPointerException
-     * @param t             参数
+     * @param t             要校验的参数
      * @param errorMsg      错误信息
+     * @param <T>           参数类型,object
      * @return              不为空,直接返回入参数
      * @throws NullPointerException if {@code t} is null
      */

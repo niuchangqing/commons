@@ -49,8 +49,8 @@ public class Joiner {
      * 结果:2,3,1
      * @param elements               数组
      * @return                      拼接结果字符串
+     * @param <T>                   泛型参数
      */
-    @SafeVarargs
     public final <T> String join(final T... elements) {
         if (isNull(elements)) {
             return null;
@@ -78,7 +78,7 @@ public class Joiner {
     /**
      * 以指定字符拼接
      * 样例:
-     * List<String> list = Lists.newLinkedList("3","2","1");
+     * Lists.newLinkedList("3","2","1");
      * Joiner.on(",").join(list);
      * 结果:3,2,1
      * @param iterable              集合
@@ -95,7 +95,7 @@ public class Joiner {
     /**
      * 以指定字符拼接
      * 样例:
-     * List<String> list = Lists.newLinkedList("3","2","1");
+     * list = Lists.newLinkedList("3","2","1");
      * Joiner.on(",").join(list,1,3);
      * 结果:2,1
      * @param iterable              集合
@@ -113,7 +113,7 @@ public class Joiner {
     /**
      * 以指定字符拼接
      * 样例:
-     * List<String> list = Lists.newLinkedList("3","2","1");
+     * list = Lists.newLinkedList("3","2","1");
      * Joiner.on(",").join(list.iterator(), 0, Iterators.size(list.iterator()));
      * 结果:3,2,1
      * @param iterator              迭代器

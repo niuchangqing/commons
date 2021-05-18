@@ -282,10 +282,10 @@ public class LocalDateTimeUtil {
 
     /**
      * LocalDateTime转Date,指定时区,指定LocalDateTime的时区进行转换
-     * @param localDateTime
-     * @param dateTimeZoneId
-     * @param zoneId
-     * @return
+     * @param localDateTime                 LocalDateTime
+     * @param dateTimeZoneId                localDateTime的时区
+     * @param zoneId                        转换指定date的时区
+     * @return                              Date
      */
     public static Date toDate(LocalDateTime localDateTime, ZoneId dateTimeZoneId, ZoneId zoneId) {
         if (isNull(localDateTime)) {

@@ -13,15 +13,16 @@ public final class Iterators {
 
     /**
      * iterator to collection
-     * <p>
-     *     Set<String> set = new HashSet();
-     *     set.add("1");
-     *     List<String> list = new ArrayList<>();
-     *     addAll(list,set.iterator());
-     * </p>
+     * {@code
+     * Set<String> set = new HashSet();
+     * set.add("1");
+     * List<String> list = new ArrayList<>();
+     * addAll(list,set.iterator());
+     * }
      * @param collection                集合对象
      * @param iterator                  Iterator迭代器参数
-     * @return
+     * @param <E>                       E
+     * @return                          存在add失败的返回就为true
      */
     public static <E> boolean addAll(Collection<E> collection, Iterator<? extends E> iterator) {
         checkNotNull(collection);

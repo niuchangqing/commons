@@ -18,6 +18,8 @@ public abstract class Ticker {
 
     /**
      * 读取当前时间
+     * {@link #NANO_TICKER}
+     * @return          long
      */
     protected abstract long read();
 

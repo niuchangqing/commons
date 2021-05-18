@@ -149,6 +149,7 @@ public class IOUtil {
      * 将reader中的char复制给output
      * @param reader                Reader
      * @param output                OutputStream
+     * @throws IOException          IOException
      */
     public static void copy(final Reader reader, final OutputStream output) throws IOException {
         OutputStreamWriter out = new OutputStreamWriter(output);
@@ -177,6 +178,8 @@ public class IOUtil {
      * 将reader中的内容复制给writer
      * @param reader                Reader
      * @param writer                Writer
+     * @return                      内容总长度
+     * @throws IOException          IOException
      */
     public static long copy(final Reader reader, Writer writer) throws IOException {
         char[] chars = new char[DEFAULT_BUFFER_SIZE];

@@ -45,8 +45,8 @@ public class FilenameUtil {
     /**
      * 获取文件名称，带后缀名
      * 如：/文件夹/图片.JPG = 图片.JPG
-     * @param filename
-     * @return
+     * @param filename            文件名称/文件路径
+     * @return                    文件名称,带后缀名
      */
     public static String getName(final String filename) {
         if (isNull(filename)) {

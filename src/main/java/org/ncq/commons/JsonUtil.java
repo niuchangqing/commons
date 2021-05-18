@@ -89,7 +89,7 @@ public class JsonUtil {
     /**
      * 字符串转指定java对象
      * <p>
-     *     嵌套对象使用,如:List<User>
+     *     嵌套对象使用,如:{@code List<User>}
      * </p>
      * @param str       指定字符串
      * @param reference TypeReference

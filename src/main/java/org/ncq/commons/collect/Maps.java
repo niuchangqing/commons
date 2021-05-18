@@ -15,6 +15,8 @@ public final class Maps {
 
     /**
      * 创建HashMap
+     * @param <K>           K
+     * @param <V>           V
      * @return              a empty HashMap
      */
     public static <K, V> HashMap<K,V> newHashMap() {
@@ -25,6 +27,8 @@ public final class Maps {
      * 创建HashMap,并初始化数据
      * 可用与TreeMap,LinkedHashMap等转HashMap
      * @param map               HashMap,TreeMap等等Map实现
+     * @param <K>               K
+     * @param <V>               V
      * @return                  HashMap
      */
     public static <K, V> HashMap<K, V> newHashMap(Map<? extends K, ? extends V> map) {
@@ -35,6 +39,8 @@ public final class Maps {
     /**
      * 创建指定大小的HashMap
      * @param size              大小
+     * @param <V>               V
+     * @param <K>               K
      * @return                  HashMap
      */
     public static <K, V> HashMap<K, V> newHashMapWithSize(int size) {
@@ -43,6 +49,8 @@ public final class Maps {
 
     /**
      * 创建LinkedHashMap
+     * @param <V>               V
+     * @param <K>               K
      * @return                  a empty LinkedHashMap
      */
     public static <K, V> LinkedHashMap<K, V> newLinkedHashMap() {
@@ -53,6 +61,8 @@ public final class Maps {
      * 创建LinkedHashMap,并初始化数据
      * 可用户HashMap,TreeMap等map转LinkedHashMap
      * @param map               HashMap,TreeMap等map参数
+     * @param <V>               V
+     * @param <K>               K
      * @return                  LinkedHashMap
      */
     public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(Map<? extends K, ? extends V> map) {
@@ -63,6 +73,8 @@ public final class Maps {
     /**
      * 创建指定大小的LinkedHashMap
      * @param size              大小参数
+     * @param <V>               V
+     * @param <K>               K
      * @return                  LinkedHashMap
      */
     public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(int size) {
@@ -71,6 +83,8 @@ public final class Maps {
 
     /**
      * 创建ConcurrentMap
+     * @param <V>               V
+     * @param <K>               K
      * @return                  a empty ConcurrentMap
      */
     public static <K, V> ConcurrentMap<K, V> newConcurrentMap() {
@@ -81,7 +95,9 @@ public final class Maps {
      * 创建ConcurrentMap,并初始化数据
      * 可用于HashMap,LinkedHashMap等map转创建ConcurrentMap
      * @param map                       map参数
-     * @return
+     * @param <K>                       K
+     * @param <V>                       V
+     * @return                          a ConcurrentMap
      */
     public static <K, V> ConcurrentMap<K, V> newConcurrentMap(Map<? extends K, ? extends V> map) {
         return new ConcurrentHashMap<>(map);
@@ -90,6 +106,8 @@ public final class Maps {
     /**
      * 创建指定大小的ConcurrentMap
      * @param size                  大小参数
+     * @param <K>                   K
+     * @param <V>                   V
      * @return                      ConcurrentMap
      */
     public static <K, V> ConcurrentMap<K, V> newConcurrentMapWithSize(int size) {
@@ -98,6 +116,8 @@ public final class Maps {
 
     /**
      * 创建TreeMap
+     * @param <K>               K
+     * @param <V>               V
      * @return                  a empty TreeMap
      */
     public static <K, V> TreeMap<K,V> newTreeMap() {
@@ -108,6 +128,8 @@ public final class Maps {
      * 创建TreeMap,并初始化数据
      * 可用于HashMap,ConcurrentMap等map转TreeMap
      * @param map               HashMap,TreeMap等map参数
+     * @param <K>               K
+     * @param <V>               V
      * @return                  TreeMap
      */
     public static <K, V> TreeMap<K,V> newTreeMap(Map<? extends K, ? extends V> map) {
@@ -117,6 +139,8 @@ public final class Maps {
 
     /**
      * 创建WeakHashMap
+     * @param <K>               K
+     * @param <V>               V
      * @return                  a empty WeakHashMap
      */
     public static <K, V> WeakHashMap<K, V> newWeakHashMap() {
@@ -126,6 +150,8 @@ public final class Maps {
     /**
      * 创建WeakHashMap,并初始化数据
      * @param map               HashMap,TreeMap等map参数
+     * @param <K>               K
+     * @param <V>               V
      * @return                  WeakHashMap
      */
     public static <K, V> WeakHashMap<K, V> newWeakHashMap(Map<? extends K, ? extends V> map) {
@@ -136,6 +162,8 @@ public final class Maps {
     /**
      * 创建指定大小的WeakHashMap
      * @param size              数量大小参数
+     * @param <K>               K
+     * @param <V>               V
      * @return                  a empty WeakHashMap
      */
     public static <K, V> WeakHashMap<K, V> newWeakHashMap(int size) {

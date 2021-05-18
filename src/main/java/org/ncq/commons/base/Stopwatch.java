@@ -47,6 +47,7 @@ public final class Stopwatch {
 
     /**
      * 计时器开始
+     * @return          Stopwatch(计时器对象)
      */
     public Stopwatch start() {
         checkState(!isRunning, "This Stopwatch is already running");
@@ -71,6 +72,7 @@ public final class Stopwatch {
      * 重置计时器
      * 该方法重置计时器,当前计时器状态会处于stop状态
      * {@link #resetAndStart()}  resetAndStart()会重置计时器并开始
+     * @return              Stopwatch(计时器对象)
      */
     public Stopwatch reset() {
         this.isRunning = false;
@@ -80,7 +82,8 @@ public final class Stopwatch {
 
     /**
      * 重置计时器并开始
-     * @return
+     * {@link #reset()}     rest()会重置计时器,但是计时器会处于stop状态
+     * @return              Stopwatch(计时器对象)
      */
     public Stopwatch resetAndStart() {
         this.isRunning = false;

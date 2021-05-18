@@ -14,6 +14,8 @@ public final class Lists {
 
     /**
      * 创建ArrayList集合
+     * @param <E>               E
+     * @return                  a empty ArrayList
      */
     public static <E> ArrayList<E> newArrayList() {
         return new ArrayList<>();
@@ -23,6 +25,7 @@ public final class Lists {
      * 创建ArrayList集合,并初始化数据
      * 可用于数组转ArrayList集合
      * @param elements                  初始化数据参数
+     * @param <E>                       E
      * @return                          ArrayList
      */
     public static <E> ArrayList<E> newArrayList(E... elements) {
@@ -37,6 +40,7 @@ public final class Lists {
      * 创建ArrayList集合,并初始化数据
      * 可用于Set,Vector,List等集合类型转ArrayList
      * @param elements                  初始化数据参数
+     * @param <E>                       E
      * @return                          ArrayList
      */
     public static <E> ArrayList<E> newArrayList(Iterable<? extends E> elements) {
@@ -53,6 +57,7 @@ public final class Lists {
      *     如:set.iterator();
      * </p>
      * @param elements                  初始化数据参数,支持Iterator迭代器
+     * @param <E>                       E
      * @return                          ArrayList
      */
     public static <E> ArrayList<E> newArrayList(Iterator<? extends E> elements) {
@@ -64,7 +69,8 @@ public final class Lists {
     /**
      * 创建指定大小的ArrayList集合
      * @param size                      指定大小
-     * @return
+     * @param <E>                       E
+     * @return                          ArrayList
      */
     public static <E> ArrayList<E> newArrayListWithSize(int size) {
         return new ArrayList<>(size);
@@ -72,6 +78,7 @@ public final class Lists {
 
     /**
      * 创建LinkedList集合
+     * @param <E>                       E
      * @return                          LinkedList
      */
     public static <E> LinkedList<E> newLinkedList() {
@@ -82,6 +89,7 @@ public final class Lists {
      * 创建LinkedList集合,并初始化数据
      * 可用于数组转LinkedList集合
      * @param elements                  数组
+     * @param <E>                       E
      * @return                          LinkedList
      */
     public static <E> LinkedList<E> newLinkedList(E... elements) {
@@ -93,6 +101,7 @@ public final class Lists {
      * 创建LinkedList集合,并初始化数据
      * 可用于Set,Vector,List等集合类型转ArrayList
      * @param elements                  集合参数
+     * @param <E>                       E
      * @return                          LinkedList
      */
     public static <E> LinkedList<E> newLinkedList(Iterable<? extends E> elements) {
@@ -108,6 +117,7 @@ public final class Lists {
      *     如: set.iterator();
      * </p>
      * @param elements                  参数,Iterator迭代器
+     * @param <E>                       E
      * @return                          LinkedList
      */
     public static <E> LinkedList<E> newLinkedList(Iterator<? extends E> elements) {
