@@ -1,11 +1,16 @@
 package org.ncq.commons;
 
+import org.ncq.commons.exception.IORuntimeException;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URLConnection;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static org.ncq.commons.CollectionUtil.isEmpty;
+import static org.ncq.commons.StringUtil.isEmpty;
 import static org.ncq.commons.base.Objects.isNull;
 import static org.ncq.commons.base.Objects.nonNull;
 import static org.ncq.commons.base.Preconditions.checkNotNull;
@@ -29,6 +34,18 @@ public class IOUtil {
      */
     private static final int DEFAULT_BUFFER_SIZE = 8192;
 
+    /**
+     * 获取当前系统换行符
+     */
+    public static final String LINE_SEPARATOR;
+
+    static {
+        StringWriter buf = new StringWriter();
+        PrintWriter out = new PrintWriter(buf);
+        out.println();
+        LINE_SEPARATOR = buf.toString();
+        out.close();
+    }
     /**
      * 关闭
      * 不抛出异常
@@ -102,18 +119,63 @@ public class IOUtil {
      * input转byte[]
      * @param inputStream       InputStream
      * @return                  byte[]
-     * @throws IOException      IOException
      * @throws NullPointerException inputStream为空抛出
      */
-    public static byte[] toByteArray(final InputStream inputStream) throws IOException {
+    public static byte[] toByteArray(final InputStream inputStream) {
         checkNotNull(inputStream);
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
         int n = 0;
-        while (-1 != (n = inputStream.read(buffer))) {
-            output.write(buffer, 0, n);
+        try {
+            while (-1 != (n = inputStream.read(buffer))) {
+                output.write(buffer, 0, n);
+            }
+            return output.toByteArray();
+        }catch (IOException e) {
+            throw new IORuntimeException(e);
         }
-        return output.toByteArray();
+    }
+
+    /**
+     * input转byte
+     * 已知大小的输入流
+     * @param inputStream               InputStream
+     * @param size                      输入流的大小
+     * @return                          byte[]
+     */
+    public static byte[] toByteArray(final InputStream inputStream, long size) {
+        if(size > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("Size cannot be greater than Integer max value: " + size);
+        }
+        return toByteArray(inputStream, (int) size);
+    }
+
+    /**
+     * input转byte
+     * 已知大小的输入流
+     * @param inputStream               InputStream
+     * @param size                      输入流的大小
+     * @return                          byte[]
+     */
+    public static byte[] toByteArray(final InputStream inputStream, int size) {
+        checkNotNull(inputStream);
+        if (size < 0) {
+            throw new IllegalArgumentException("Size must be equal or greater than zero " + size);
+        }
+        byte[] buffer = new byte[size];
+        try {
+            int n = 0;
+            int offset = 0;
+            while (offset < size && (n = inputStream.read(buffer, offset, size - offset)) != -1) {
+                offset += n;
+            }
+            if (offset != size) {
+                throw new IORuntimeException("Unexpected readed size. current: " + offset + ", excepted: " + size);
+            }
+            return buffer;
+        }catch (IOException e) {
+            throw new IORuntimeException(e);
+        }
     }
 
     /**
@@ -190,5 +252,114 @@ public class IOUtil {
             count += n;
         }
         return count;
+    }
+
+    /**
+     * 写入字符串
+     * @param data                  指定字符串
+     * @param output                OutputStream
+     * {@link String#getBytes()}
+     */
+    public static void write(String data, OutputStream output) {
+        if (isNull(data)) {
+            //空，不处理
+            return;
+        }
+        try {
+            output.write(data.getBytes());
+        }catch (IOException e) {
+            throw new IORuntimeException(e);
+        }
+    }
+
+    /**
+     * 写入字符串
+     * @param data                  指定的字符串
+     * @param output                OutputStream
+     * @param encoding              编码格式,{@link String#getBytes(String)}
+     */
+    public static void write(String data, OutputStream output, String encoding) {
+        if (isNull(data)) {
+            return;
+        }
+        if (isEmpty(encoding)) {
+            write(data, output);
+        }else {
+            try {
+                output.write(data.getBytes(encoding));
+            }catch (IOException e) {
+                throw new IORuntimeException(e);
+            }
+        }
+    }
+
+    /**
+     * 按行写入数据,集合中的一条数据占一行,末尾自动追加换行符
+     * @param lines                     写入的数据
+     * @param output                    OutputStream
+     * @param encoding                  编码格式,可以为空
+     * @param lineEnding                换行符,可以为空,为空{@link #LINE_SEPARATOR}
+     */
+    public static void writeLines(Collection<?> lines, OutputStream output, String encoding, String lineEnding) {
+        if (isEmpty(lines)) {
+            return;
+        }
+        if (isNull(encoding)) {
+            writeLinesForLineEnding(lines, output, lineEnding);
+            return;
+        }
+        if (isEmpty(lineEnding)) {
+            lineEnding = LINE_SEPARATOR;
+        }
+        for (Object line : lines) {
+            try {
+                if (nonNull(line)) {
+                    output.write(line.toString().getBytes(encoding));
+                }
+                output.write(lineEnding.getBytes(encoding));
+            }catch (IOException e) {
+                throw new IORuntimeException(e);
+            }
+        }
+    }
+
+    /**
+     * 按行写入数据
+     * 行之间自动追加换行符
+     * @param lines                 写入的数据
+     * @param output                OutputStream
+     * @param encoding              编码格式
+     */
+    public static void writeLines(Collection<?> lines, OutputStream output, String encoding) {
+        writeLines(lines, output, encoding, null);
+    }
+
+    /**
+     * 按行写入数据
+     * 行之间自动追加换行符
+     * @param lines                 写入的数据
+     * @param output                OutputStream
+     */
+    public static void writeLines(Collection<?> lines, OutputStream output) {
+        writeLines(lines, output, null);
+    }
+
+    private static void writeLinesForLineEnding(Collection<?> lines, OutputStream output, String lineEnding) {
+        if (isEmpty(lines)) {
+            return;
+        }
+        if (isNull(lineEnding)) {
+            lineEnding = LINE_SEPARATOR;
+        }
+        for (Object line : lines) {
+            try {
+                if (nonNull(line)) {
+                    output.write(line.toString().getBytes());
+                }
+                output.write(lineEnding.getBytes());
+            }catch (IOException e) {
+                throw new IORuntimeException(e);
+            }
+        }
     }
 }
